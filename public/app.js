@@ -287,8 +287,12 @@ async function deleteTab() {
 // ── Auth Modal ─────────────────────────────────────────────────────────────
 let isSetupMode = false;
 
-async function showAuthModal() {
+async function showAuthModal(showWarning = false) {
   showLoader();
+  // Show/hide the untrusted-device warning banner
+  const warningEl = document.getElementById('modal-untrusted-warning');
+  if (warningEl) warningEl.hidden = !showWarning;
+
   try {
     const status = await apiFetch('/api/status');
     isSetupMode = status.setup;
@@ -520,6 +524,6 @@ btnDeleteCancel.addEventListener('click', () => {
     await loadTabs();
   } else {
     hideLoader();
-    await showAuthModal();
+    await showAuthModal(!ipTrusted);  // show warning when IP is not recognised
   }
 })();

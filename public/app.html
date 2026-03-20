@@ -49,6 +49,9 @@
   <!-- ── Password Modal (login & setup) ── -->
   <div class="modal-overlay" id="modal-auth">
     <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-warning" id="modal-untrusted-warning" hidden>
+        ⚠ This is not Knull's device or environment — please enter the password to continue.
+      </div>
       <h2 id="modal-auth-title">Password required</h2>
       <p id="modal-auth-desc">Enter the password to access your notes.</p>
       <label for="input-password">Password:</label>
