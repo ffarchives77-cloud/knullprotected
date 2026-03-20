@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KnullProtected – Notes</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="app-body">
+
+  <!-- Full-page security-check loader -->
+  <div id="page-loader">
+    <div class="loader-box">
+      <div class="loader-title">Knull<span>Protected</span></div>
+      <div class="loader-status-line" id="loader-status">Initializing…</div>
+      <div class="loader-track">
+        <div class="loader-fill" id="loader-fill"></div>
+      </div>
+      <div class="loader-sub" id="loader-sub">Establishing secure connection</div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="app-header-title">Knull<span>Protected</span></div>
+    <div class="header-actions">
+      <button class="btn-action" id="btn-reload" title="Reload from server">Reload</button>
+      <button class="btn-action save-btn" id="btn-save" title="Save all tabs">Save</button>
+      <button class="btn-action" id="btn-preview" title="Toggle link preview">Preview</button>
+      <button class="btn-action" id="btn-change-pw" title="Change password">Change Password</button>
+    </div>
+  </header>
+
+  <!-- Tab bar -->
+  <div class="tab-bar" id="tab-bar">
+    <!-- tabs injected by JS -->
+    <button class="btn-add-tab" id="btn-add-tab" title="New tab">+</button>
+  </div>
+
+  <!-- Editor -->
+  <div class="editor-area">
+    <textarea id="editor" spellcheck="false" placeholder="your text goes here…"></textarea>
+    <div id="preview" class="preview-pane" hidden></div>
+  </div>
+
+  <!-- Status bar -->
+  <div id="status-bar">Ready</div>
+
+  <!-- ── Password Modal (login & setup) ── -->
+  <div class="modal-overlay" id="modal-auth">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h2 id="modal-auth-title">Password required</h2>
+      <p id="modal-auth-desc">Enter the password to access your notes.</p>
+      <label for="input-password">Password:</label>
+      <input type="password" id="input-password" autocomplete="current-password" />
+      <div class="modal-error" id="modal-auth-error"></div>
+      <div class="modal-actions">
+        <button class="btn-modal" id="btn-auth-submit">Decrypt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Change Password Modal ── -->
+  <div class="modal-overlay" id="modal-change-pw">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h2>Change Password</h2>
+      <label for="input-old-pw">Current password:</label>
+      <input type="password" id="input-old-pw" autocomplete="current-password" />
+      <label for="input-new-pw">New password:</label>
+      <input type="password" id="input-new-pw" autocomplete="new-password" />
+      <label for="input-new-pw2">Confirm new password:</label>
+      <input type="password" id="input-new-pw2" autocomplete="new-password" />
+      <div class="modal-error" id="modal-pw-error"></div>
+      <div class="modal-actions">
+        <button class="btn-modal secondary" id="btn-change-pw-cancel">Cancel</button>
+        <button class="btn-modal" id="btn-change-pw-submit">Update Password</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Confirm Delete Tab Modal ── -->
+  <div class="modal-overlay" id="modal-confirm-delete">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h2>Delete tab?</h2>
+      <p id="modal-delete-desc">This will permanently delete the tab and its content.</p>
+      <div class="modal-actions">
+        <button class="btn-modal secondary" id="btn-delete-cancel">Cancel</button>
+        <button class="btn-modal" id="btn-delete-confirm">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

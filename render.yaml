@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: knullprotected
+    env: node
+    region: singapore
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: TURSO_URL
+        sync: false
+      - key: TURSO_TOKEN
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: TRUSTED_IP
+        value: 117.213.237.150
