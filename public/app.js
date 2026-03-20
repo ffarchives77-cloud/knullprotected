@@ -1,7 +1,10 @@
 /* ── KnullProtected – app.js ───────────────────────────────────────────────── */
 
 const API = '';          // same origin
-let token = localStorage.getItem('kp_token') || null;
+// NOTE: token starts null — we never pre-load from localStorage.
+// IP-granted tokens live in memory only. Password tokens come from localStorage
+// only AFTER the IP check fails, so every page load re-verifies the IP.
+let token = null;
 let tabs = [];           // [{id, name, content, tab_order}]
 let activeTabId = null;
 let dirtyTabs = new Set();
@@ -485,45 +488,48 @@ btnDeleteCancel.addEventListener('click', () => {
 (async () => {
   const startTime = Date.now();
 
-  // Step 1: Check if IP is trusted (runs even if we already have a token,
-  //         to ensure the 3-second loader always plays)
   loaderProgress(10, 'Initializing secure session', 'Connecting to server…');
 
+  // Step 1: ALWAYS re-verify IP on every page load.
+  // IP tokens are NEVER stored in localStorage — they are session-memory only.
+  // This ensures that if the IP changes, access is immediately revoked.
   let ipTrusted = false;
   try {
-    await new Promise(r => setTimeout(r, 350));  // let the bar appear
+    await new Promise(r => setTimeout(r, 350));
     loaderProgress(35, 'Verifying device identity', 'Checking trusted IP address…');
     const ipData = await apiFetch('/api/check-ip');
     if (ipData.trusted && ipData.token) {
-      // Trusted IP — store the fresh token
-      token = ipData.token;
-      localStorage.setItem('kp_token', token);
+      token = ipData.token;   // memory only — deliberately NOT written to localStorage
       ipTrusted = true;
     }
   } catch (e) {
-    // Network error or server issue — fall through to password
+    // Network / server error — fall through
   }
 
-  loaderProgress(70, ipTrusted ? 'Trusted device confirmed' : 'Verifying credentials',
-                     ipTrusted ? 'Access granted — loading notes…' : 'Password will be required…');
+  // Step 2: IP not trusted → try password token from localStorage
+  if (!ipTrusted) {
+    token = localStorage.getItem('kp_token') || null;
+  }
 
-  // Step 2: If we already had a stored token (not from IP check), mark as "known"
-  const hasToken = !!token;
+  loaderProgress(70,
+    ipTrusted ? 'Trusted device confirmed'  : 'Verifying credentials',
+    ipTrusted ? 'Access granted — loading notes…' : token ? 'Session token found…' : 'Password will be required…'
+  );
 
   // Step 3: Enforce 3-second minimum loader time
   const elapsed   = Date.now() - startTime;
   const remaining = Math.max(0, 3000 - elapsed);
   await new Promise(r => setTimeout(r, remaining));
 
-  loaderProgress(100, hasToken ? 'Access authorised' : 'Ready', 'Loading interface…');
-  await new Promise(r => setTimeout(r, 350));  // hold at 100% briefly
+  loaderProgress(100, token ? 'Access authorised' : 'Ready', 'Loading interface…');
+  await new Promise(r => setTimeout(r, 350));
 
-  // Step 4: Either load tabs or show auth modal
+  // Step 4: Load notes or show auth modal
   if (token) {
     hideLoader();
     await loadTabs();
   } else {
     hideLoader();
-    await showAuthModal(!ipTrusted);  // show warning when IP is not recognised
+    await showAuthModal(true);  // !ipTrusted is always true here
   }
 })();
