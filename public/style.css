@@ -1,3 +1,72 @@
+/* ══════════════════════════════════════════════════════════
+   THEME VARIABLES — change colors here only
+   ══════════════════════════════════════════════════════════ */
+:root {
+  /* Primary palette */
+  --primary-dark:    #4a0000;   /* header, landing bg */
+  --primary-darker:  #2a0000;   /* loader bg */
+  --primary-mid:     #9b1b1b;   /* active tab accent */
+  --primary-light:   #c09090;   /* muted text, borders */
+  --primary-xlight:  #f5d0d0;   /* main text on dark */
+
+  /* Accent (buttons, links, save) */
+  --accent:          #ff9090;
+  --accent-hover:    #4a0000;
+
+  /* Page / editor */
+  --page-bg:         #f0f0f0;
+  --editor-bg:       #ffffff;
+  --editor-text:     #222222;
+
+  /* Tab bar */
+  --tabbar-bg:       #c8c8c8;
+  --tab-bg:          #d8d8d8;
+  --tab-border:      #b0b0b0;
+  --tab-active-bg:   #ffffff;
+  --tab-active-text: #111111;
+
+  /* Status bar */
+  --statusbar-bg:    #e8e8e8;
+  --statusbar-text:  #666666;
+  --statusbar-border:#cccccc;
+
+  /* Modal */
+  --modal-bg:        #1a0000;
+  --modal-text:      #f0d0d0;
+  --modal-muted:     #c09090;
+  --modal-label:     #d0a0a0;
+  --modal-input-bg:  #2a0000;
+  --modal-input-border: #7a3030;
+  --modal-input-focus:  #e07070;
+  --modal-btn-bg:    #f0d0d0;
+  --modal-btn-text:  #4a0000;
+  --modal-btn-secondary-border: #7a3030;
+  --modal-btn-secondary-text:   #c09090;
+  --modal-btn-secondary-hover:  #3a1010;
+  --modal-error:     #ff8080;
+
+  /* Warning banner */
+  --warning-bg:      #3a2800;
+  --warning-border:  #7a5500;
+  --warning-text:    #f0b429;
+
+  /* Loader */
+  --loader-bg:       var(--primary-darker);
+  --loader-title:    var(--primary-light);
+  --loader-status:   #c07070;
+  --loader-cursor:   #e07070;
+  --loader-track:    #5a1010;
+  --loader-fill-a:   #7a1010;
+  --loader-fill-b:   #e07070;
+  --loader-sub:      #7a3030;
+
+  /* Overlay */
+  --overlay-bg: rgba(0, 0, 0, 0.55);
+
+  /* Misc */
+  --white: #ffffff;
+}
+
 /* ── Reset & Base ────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -7,8 +76,8 @@
 
 body {
   font-family: Georgia, 'Times New Roman', serif;
-  background: #0e2a4a;
-  color: #d0dce8;
+  background: var(--primary-dark);
+  color: var(--primary-xlight);
   min-height: 100vh;
 }
 
@@ -29,17 +98,12 @@ button {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.fade-in {
-  animation: fadeIn 0.5s ease both;
-}
-
-.fade-in-fast {
-  animation: fadeIn 0.25s ease both;
-}
+.fade-in      { animation: fadeIn 0.5s  ease both; }
+.fade-in-fast { animation: fadeIn 0.25s ease both; }
 
 /* ── Landing Page ────────────────────────────────────────── */
 .landing-body {
-  background: #0e2a4a;
+  background: var(--primary-dark);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,26 +122,26 @@ button {
   font-size: 3.2rem;
   font-weight: normal;
   letter-spacing: 0.12em;
-  color: #d0dce8;
+  color: var(--primary-xlight);
   margin-bottom: 0.25rem;
   text-transform: uppercase;
 }
 
 .landing-title span {
   font-weight: bold;
-  color: #ffffff;
+  color: var(--white);
 }
 
 .landing-subtitle {
   font-size: 0.95rem;
-  color: #8ba3bc;
+  color: var(--primary-light);
   margin-bottom: 2.5rem;
   letter-spacing: 0.03em;
 }
 
 .landing-desc {
   font-size: 0.9rem;
-  color: #8ba3bc;
+  color: var(--primary-light);
   line-height: 1.8;
   margin-bottom: 2.5rem;
   text-align: left;
@@ -90,14 +154,14 @@ button {
 }
 
 .landing-desc li strong {
-  color: #d0dce8;
+  color: var(--primary-xlight);
 }
 
 .btn-open {
   display: inline-block;
   background: transparent;
-  border: 1px solid #8ba3bc;
-  color: #d0dce8;
+  border: 1px solid var(--primary-light);
+  color: var(--primary-xlight);
   padding: 0.6rem 2rem;
   font-size: 0.95rem;
   letter-spacing: 0.07em;
@@ -105,13 +169,13 @@ button {
 }
 
 .btn-open:hover {
-  background: #8ba3bc;
-  color: #0e2a4a;
+  background: var(--primary-light);
+  color: var(--primary-dark);
 }
 
 /* ── App Page ────────────────────────────────────────────── */
 .app-body {
-  background: #e8e8e8;
+  background: var(--page-bg);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -119,7 +183,7 @@ button {
 
 /* Header */
 .app-header {
-  background: #0e2a4a;
+  background: var(--primary-dark);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -132,14 +196,14 @@ button {
   font-size: 1.1rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #d0dce8;
+  color: var(--primary-xlight);
   font-weight: normal;
   white-space: nowrap;
 }
 
 .app-header-title span {
   font-weight: bold;
-  color: #fff;
+  color: var(--white);
 }
 
 .header-actions {
@@ -150,8 +214,8 @@ button {
 
 .btn-action {
   background: transparent;
-  border: 1px solid #8ba3bc;
-  color: #d0dce8;
+  border: 1px solid var(--primary-light);
+  color: var(--primary-xlight);
   padding: 0.3rem 0.8rem;
   font-size: 0.8rem;
   letter-spacing: 0.05em;
@@ -159,38 +223,43 @@ button {
 }
 
 .btn-action:hover {
-  background: #8ba3bc;
-  color: #0e2a4a;
+  background: var(--primary-light);
+  color: var(--primary-dark);
 }
 
 .btn-action.save-btn {
-  border-color: #6aa3d5;
-  color: #6aa3d5;
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .btn-action.save-btn:hover {
-  background: #6aa3d5;
-  color: #0e2a4a;
+  background: var(--accent);
+  color: var(--accent-hover);
+}
+
+.btn-action.active {
+  background: var(--primary-light);
+  color: var(--primary-dark);
 }
 
 /* Tab bar */
 .tab-bar {
   display: flex;
   align-items: flex-end;
-  background: #c8c8c8;
+  background: var(--tabbar-bg);
   padding: 0.5rem 0.8rem 0 0.8rem;
   gap: 0.15rem;
   flex-wrap: wrap;
   flex-shrink: 0;
-  border-bottom: 2px solid #b0b0b0;
+  border-bottom: 2px solid var(--tab-border);
 }
 
 .tab {
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  background: #d8d8d8;
-  border: 1px solid #b0b0b0;
+  background: var(--tab-bg);
+  border: 1px solid var(--tab-border);
   border-bottom: none;
   padding: 0.3rem 0.8rem;
   font-size: 0.82rem;
@@ -204,9 +273,10 @@ button {
 }
 
 .tab.active {
-  background: #f5f5f5;
-  color: #111;
-  border-bottom: 2px solid #f5f5f5;
+  background: var(--tab-active-bg);
+  color: var(--tab-active-text);
+  border-bottom: 2px solid var(--tab-active-bg);
+  border-top: 2px solid var(--primary-mid);
   z-index: 1;
 }
 
@@ -241,12 +311,12 @@ button {
 }
 
 .tab-close:hover {
-  color: #c00;
+  color: var(--primary-mid);
 }
 
 .btn-add-tab {
   background: transparent;
-  border: 1px solid #b0b0b0;
+  border: 1px solid var(--tab-border);
   border-bottom: none;
   color: #555;
   font-size: 1rem;
@@ -266,7 +336,7 @@ button {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #f5f5f5;
+  background: var(--editor-bg);
 }
 
 #editor {
@@ -276,8 +346,8 @@ button {
   border: none;
   outline: none;
   resize: none;
-  background: #f5f5f5;
-  color: #222;
+  background: var(--editor-bg);
+  color: var(--editor-text);
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.9rem;
   line-height: 1.6;
@@ -289,8 +359,8 @@ button {
   flex: 1;
   width: 100%;
   min-height: calc(100vh - 120px);
-  background: #f5f5f5;
-  color: #222;
+  background: var(--editor-bg);
+  color: var(--editor-text);
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.9rem;
   line-height: 1.6;
@@ -301,19 +371,13 @@ button {
 }
 
 .preview-pane a {
-  color: #1a56a0;
+  color: var(--primary-mid);
   text-decoration: underline;
   word-break: break-all;
 }
 
 .preview-pane a:hover {
-  color: #0d3a75;
-}
-
-/* Preview button active state */
-.btn-action.active {
-  background: #8ba3bc;
-  color: #0e2a4a;
+  color: var(--primary-dark);
 }
 
 /* ── Modal ───────────────────────────────────────────────── */
@@ -330,13 +394,13 @@ button {
 
 .modal-overlay.visible {
   display: flex;
-  background: rgba(0, 0, 0, 0.55);
+  background: var(--overlay-bg);
   animation: fadeIn 0.2s ease both;
 }
 
 .modal {
-  background: #2b2b2b;
-  color: #d0d0d0;
+  background: var(--modal-bg);
+  color: var(--modal-text);
   padding: 2rem;
   width: 360px;
   max-width: 95vw;
@@ -346,13 +410,13 @@ button {
   font-size: 1rem;
   font-weight: normal;
   margin-bottom: 0.6rem;
-  color: #fff;
+  color: var(--white);
   letter-spacing: 0.05em;
 }
 
 .modal p {
   font-size: 0.82rem;
-  color: #999;
+  color: var(--modal-muted);
   margin-bottom: 1.2rem;
   line-height: 1.5;
 }
@@ -361,15 +425,15 @@ button {
   display: block;
   font-size: 0.82rem;
   margin-bottom: 0.4rem;
-  color: #bbb;
+  color: var(--modal-label);
 }
 
 .modal input[type="password"],
 .modal input[type="text"] {
   width: 100%;
-  background: #1a1a1a;
-  border: 1px solid #555;
-  color: #e0e0e0;
+  background: var(--modal-input-bg);
+  border: 1px solid var(--modal-input-border);
+  color: var(--modal-text);
   padding: 0.5rem 0.6rem;
   font-size: 0.9rem;
   font-family: inherit;
@@ -378,13 +442,13 @@ button {
 }
 
 .modal input:focus {
-  border-color: #6aa3d5;
+  border-color: var(--modal-input-focus);
 }
 
 .modal-warning {
-  background: #3a2800;
-  border: 1px solid #7a5500;
-  color: #f0b429;
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+  color: var(--warning-text);
   font-size: 0.78rem;
   line-height: 1.5;
   padding: 0.6rem 0.8rem;
@@ -399,9 +463,9 @@ button {
 }
 
 .btn-modal {
-  background: #e0e0e0;
+  background: var(--modal-btn-bg);
   border: none;
-  color: #111;
+  color: var(--modal-btn-text);
   padding: 0.45rem 1.2rem;
   font-size: 0.85rem;
   font-family: inherit;
@@ -409,23 +473,23 @@ button {
 }
 
 .btn-modal:hover {
-  background: #fff;
+  background: var(--white);
 }
 
 .btn-modal.secondary {
   background: transparent;
-  border: 1px solid #555;
-  color: #aaa;
+  border: 1px solid var(--modal-btn-secondary-border);
+  color: var(--modal-btn-secondary-text);
 }
 
 .btn-modal.secondary:hover {
-  background: #444;
-  color: #fff;
+  background: var(--modal-btn-secondary-hover);
+  color: var(--white);
 }
 
 .modal-error {
   font-size: 0.8rem;
-  color: #e07070;
+  color: var(--modal-error);
   margin-bottom: 0.6rem;
   min-height: 1rem;
 }
@@ -433,10 +497,10 @@ button {
 /* ── Status bar ───────────────────────────────────────────── */
 #status-bar {
   font-size: 0.75rem;
-  color: #666;
+  color: var(--statusbar-text);
   padding: 0.25rem 1.2rem;
-  background: #e0e0e0;
-  border-top: 1px solid #ccc;
+  background: var(--statusbar-bg);
+  border-top: 1px solid var(--statusbar-border);
   text-align: right;
   flex-shrink: 0;
 }
@@ -455,7 +519,7 @@ button {
 #page-loader {
   position: fixed;
   inset: 0;
-  background: #0a1f38;
+  background: var(--loader-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -478,19 +542,19 @@ button {
   font-size: 1.5rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #8ba3bc;
+  color: var(--loader-title);
   margin-bottom: 1.8rem;
 }
 
 .loader-title span {
-  color: #fff;
+  color: var(--white);
   font-weight: bold;
 }
 
 .loader-status-line {
   font-size: 0.78rem;
   letter-spacing: 0.08em;
-  color: #6a8fad;
+  color: var(--loader-status);
   text-transform: uppercase;
   margin-bottom: 0.7rem;
   min-height: 1.1rem;
@@ -501,12 +565,12 @@ button {
   content: '|';
   animation: blink 0.8s step-start infinite;
   margin-left: 2px;
-  color: #6aa3d5;
+  color: var(--loader-cursor);
 }
 
 .loader-track {
   height: 3px;
-  background: #1a3a5c;
+  background: var(--loader-track);
   border-radius: 2px;
   overflow: hidden;
   margin-bottom: 0.9rem;
@@ -515,7 +579,11 @@ button {
 .loader-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #1a4a7a 0%, #6aa3d5 50%, #1a4a7a 100%);
+  background: linear-gradient(90deg,
+    var(--loader-fill-a) 0%,
+    var(--loader-fill-b) 50%,
+    var(--loader-fill-a) 100%
+  );
   background-size: 200% 100%;
   border-radius: 2px;
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -524,7 +592,7 @@ button {
 
 .loader-sub {
   font-size: 0.72rem;
-  color: #3a6080;
+  color: var(--loader-sub);
   letter-spacing: 0.05em;
   transition: opacity 0.3s;
 }
